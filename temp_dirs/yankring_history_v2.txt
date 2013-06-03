@@ -1,0 +1,18 @@
+另外，有关数据分析中的一些常用名词，希望能够和越南团队统一称呼，例如我们这边通常都对数据分析的数据源称为 角色库（Role DB）、日志库（Log DB）、Paysys DB没有越南邮件中globe db那样的称呼，越南邮件中的那些说法给我们这边理解造成很大的困惑，每次都要确认一次才知道说的是什么内容 :),v
+记录的时候自动根据程序设定写的,v
+x,v
+:let g:session_autosave = 'no',v
+i,v
+n,v
+u,v
+,,v
+dos,v
+"自动保存Session及自动加载上次退出VIM时的Sessionlet g:session_autosave = 1let g:session_autoload = 1,v
+/Users/chenyujun/MySpace/my_vim_config,v
+打造Vim之自动会话载入/保存和持久化undo,v
+http://imtx.me/archives/1810.html,v
+" Auto Session Save/Restorefunction GetProjectName()    " Get the current editing file list, Unix only    let edit_files = split(system("ps -o command= -p " . getpid()))    if len(edit_files) >= 2        let project_path = edit_files[1]        if project_path[0] != '/'            let project_path = getcwd() . project_path        endif    else        let project_path = getcwd()    endif    return shellescape(substitute(project_path, '[/]', '', 'g'))endfunctionfunction SaveSession()    "NERDTree doesn't support session, so close before saving    execute ':NERDTreeClose'     let project_name = GetProjectName()    execute 'mksession! ~/.vim/sessions/' . project_nameendfunctionfunction RestoreSession()    let session_path = expand('~/.vim/sessions/' . GetProjectName())    if filereadable(session_path)        execute 'so ' . session_path        if bufexists(1)            for l in range(1, bufnr('$'))                if bufwinnr(l) == -1                    exec 'sbuffer ' . l                endif            endfor        endif    endif    "Make sure the syntax is on    syntax on endfunctionnmap ssa :call SaveSession()smap SO :call RestoreSession()autocmd VimLeave * call SaveSession()autocmd VimEnter * call RestoreSession()" Persistent undoset undodir=~/.vim/undodirset undofileset undolevels=1000 "maximum number of changes that can be undoneset undoreload=10000 "maximum number lines to save for undo on a buffer reload,v
+sessionmisc,v
+/Users/chenyujun/vim_runtime/hawk_bundles/vim_session/Users/chenyujun/vim_runtime/hawk_bundles/vim_misc,v
+call pathogen#runtime_append_all_bundles(),V
+mksession,v
