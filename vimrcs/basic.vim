@@ -157,7 +157,7 @@ endif
 "set encoding=utf8
 
 " Use Unix as the standard file type
-set ffs=unix,dos,mac
+set ffs=dos,unix,mac
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -479,7 +479,7 @@ set guifont=Arial_monospaced_for_SAP:h16
 "else
 "echoerr "Sorry, this version of (g)vim was not compiled with multi_byte"
 "endif
-"防止特殊符号无线正常显示 by cyj
+"防止特殊符号无法正常显示 by cyj
 set ambiwidth=double
 "如遇Unicode值大于255的文本，不必等到空格再折行 by cyj
 set formatoptions+=m
@@ -537,9 +537,3 @@ set formatoptions+=B
 "smap SO :call RestoreSession()
 "autocmd VimLeave * call SaveSession()
 "autocmd VimEnter * call RestoreSession()
-"
-"" Persistent undo
-"set undodir=~/.vim/undodir
-"set undofile
-"set undolevels=1000 "maximum number of changes that can be undone
-"set undoreload=10000 "maximum number lines to save for undo on a buffer reload
